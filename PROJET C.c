@@ -1,6 +1,20 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+typedef struct {
+    char type[30];
+    float duree;
+    float vitesse;
+    char priorite[10];
+} Commande;
+typedef struct Noeud {
+    Commande cmd;
+    struct Noeud *suivant;
+} Noeud;
+typedef struct {
+    Noeud *tete;
+    Noeud *queue;
+} File;
 void ajouter_commande_normale(Commande c){ enfiler(&file_normale,c); }
 void ajouter_commande_urgente(Commande c){ enfiler(&file_urgente,c); }
 int prendre_prochaine_commande(Commande *out){
