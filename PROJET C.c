@@ -1,6 +1,32 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#define LONGUEUR_PISTE 20
+#define LARGEUR_PISTE 10
+#define VITESSE_PAS_LONG 1
+#define VITESSE_PAS_LAT 1
+#define DUREE_CYCLE_BASE 0.5
+#define NORMALE "NORMALE"
+#define URGENTE "URGENTE"
+#define AVANCER "AVANCER"
+#define RECULER "RECULER"
+#define TOURNER_GAUCHE "TOURNER_GAUCHE"
+#define TOURNER_DROITE "TOURNER_DROITE"
+#define ARRET_URGENCE "ARRET_URGENCE"
+typedef struct {
+    char type[30];
+    float duree;
+    float vitesse;
+    char priorite[10];
+} Commande;
+typedef struct Noeud {
+    Commande cmd;
+    struct Noeud *suivant;
+} Noeud;
+typedef struct {
+    Noeud *tete;
+    Noeud *queue;
+} File;
 void ajouter_commande_normale(Commande c){ enfiler(&file_normale,c); }
 void ajouter_commande_urgente(Commande c){ enfiler(&file_urgente,c); }
 int prendre_prochaine_commande(Commande *out){
